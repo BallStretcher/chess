@@ -23,6 +23,18 @@ public class Panel extends JPanel implements Runnable {
             pieces.add(new Peshka(BLACK,i,1));
         pieces.add(new Rook(BLACK,0,0));
         pieces.add(new Rook(BLACK,7,0));
+        pieces.add(new KoHb(1,WHITE,1,7));
+        pieces.add(new KoHb(2,WHITE,6,7));
+        pieces.add(new KoHb(1,BLACK,1,0));
+        pieces.add(new KoHb(2,BLACK,6,0));
+        pieces.add(new Slonyara(1,WHITE,5,7));
+        pieces.add(new Slonyara(1,BLACK,5,0));
+        pieces.add(new Slonyara(2,WHITE,2,7));
+        pieces.add(new Slonyara(2,BLACK,2,0));
+        pieces.add(new Queen(BLACK,3,0));
+        pieces.add(new Queen(WHITE,3,7));
+        pieces.add(new King(BLACK,4,0));
+        pieces.add(new King(WHITE,4,7));
     }
     private void copyPiece(ArrayList<piece> src,ArrayList<piece>tgt){
         tgt.clear();
