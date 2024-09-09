@@ -19,6 +19,7 @@ public class piece {
         y = getY(row);
         colBefore = col;
         rowBefore = row;
+
     }
     public BufferedImage getImage(String imagePath){
         try{
@@ -37,7 +38,24 @@ public class piece {
     public int getY(int row) {
         return row*Borda.SQUARE_SIZE;
     }
+    public int getRow(int y) {
+        return ((y+Borda.HALF_SQUARE_SIZE)/Borda.SQUARE_SIZE);
+    }
+
+    public int getCol(int x) {
+        return ((x+Borda.HALF_SQUARE_SIZE)/Borda.SQUARE_SIZE);
+    }
+
+
     public void draw(Graphics2D g2){
         g2.drawImage(image,x,y,Borda.SQUARE_SIZE,Borda.SQUARE_SIZE,null);
     }
+    public void updPos(){
+        x = getX(col);
+        y = getY(row);
+        colBefore = getCol(x);
+        rowBefore = getRow(y);
+
+    }
+
 }

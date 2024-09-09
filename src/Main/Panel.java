@@ -11,8 +11,13 @@ public class Panel extends JPanel implements Runnable {
     final int fps = 60;
     Thread gameThread;
     Borda borda = new Borda();
+    Maus mouse = new Maus();
+
+
+
     public static ArrayList<piece> pieces = new ArrayList<>();
     public static ArrayList<piece> simPieces = new ArrayList<>();
+    piece activeP;
 
     public void setPieces(){
         for(int i=0;i<8;i++)
@@ -53,11 +58,48 @@ public class Panel extends JPanel implements Runnable {
         setBackground(Color.BLACK);
         setPieces();
         copyPiece(pieces,simPieces);
+        addMouseMotionListener(mouse);
+        addMouseListener(mouse);
     }
 
     private void update(){
+        if(mouse.pressed){
+            if(activeP==null){
+                for(piece a:simPieces){
+                    if(a.color==currColor &&
+                            a.col== mouse.x/Borda.SQUARE_SIZE &&
+                            a.row== mouse.y/Borda.SQUARE_SIZE){
+                        activeP=a;
+
+                    }
+                }
+            }
+            else simulate();
+
+        }
+        if(!mouse.pressed){
+            if(activeP!=null){
+                activeP.updPos();
+                activeP=null;
+            }
+
+
+        }
+
+
+
+
 
     }
+    private void simulate(){
+    activeP.x = mouse.x-Borda.HALF_SQUARE_SIZE;
+    activeP.y = mouse.y-Borda.HALF_SQUARE_SIZE;
+    activeP.row = activeP.getRow(activeP.y);
+    activeP.col = activeP.getCol(activeP.x);
+    }
+
+
+
     public void launch(){
         gameThread = new Thread(this);
         gameThread.start();
@@ -68,6 +110,13 @@ public class Panel extends JPanel implements Runnable {
         borda.draw(g2);
         for(piece p : simPieces){
             p.draw(g2);
+        }
+        if(activeP!=null){
+            g2.setColor(Color.DARK_GRAY);
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
+            g2.fillRect(activeP.col*Borda.SQUARE_SIZE,activeP.row*Borda.SQUARE_SIZE,Borda.SQUARE_SIZE,Borda.SQUARE_SIZE);
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+            activeP.draw(g2);
         }
     }
 
