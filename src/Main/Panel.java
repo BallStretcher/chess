@@ -12,6 +12,8 @@ public class Panel extends JPanel implements Runnable {
     Thread gameThread;
     Borda borda = new Borda();
     Maus mouse = new Maus();
+    boolean canMove;
+    boolean validSquare;
 
 
 
@@ -79,6 +81,7 @@ public class Panel extends JPanel implements Runnable {
         }
         if(!mouse.pressed){
             if(activeP!=null){
+                if(validSquare)
                 activeP.updPos();
                 activeP=null;
             }
@@ -96,6 +99,12 @@ public class Panel extends JPanel implements Runnable {
     activeP.y = mouse.y-Borda.HALF_SQUARE_SIZE;
     activeP.row = activeP.getRow(activeP.y);
     activeP.col = activeP.getCol(activeP.x);
+    canMove = false;
+    validSquare=false;
+    if(activeP.canMove(activeP.col,activeP.row)){
+        canMove=true;
+        validSquare=false;
+    }
     }
 
 

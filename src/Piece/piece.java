@@ -55,7 +55,14 @@ public class piece {
         y = getY(row);
         colBefore = getCol(x);
         rowBefore = getRow(y);
-
+    }
+    public boolean canMove(int targetCol,int targetRow){
+        return false;
+    }
+    public boolean outside(int targetCol,int targetRow){
+        if(targetCol<0||targetRow<0||targetCol>7||targetRow>7)
+            return false;
+        else return true;
     }
 
 }
