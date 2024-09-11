@@ -1,6 +1,7 @@
 package Piece;
 
 import Main.Borda;
+import Main.Panel;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -50,19 +51,36 @@ public class piece {
     public void draw(Graphics2D g2){
         g2.drawImage(image,x,y,Borda.SQUARE_SIZE,Borda.SQUARE_SIZE,null);
     }
-    public void updPos(){
+    public void updPos()
+    {
         x = getX(col);
         y = getY(row);
         colBefore = getCol(x);
         rowBefore = getRow(y);
+    }
+    public void reset()
+    {
+        col = colBefore;
+        row = rowBefore;
+        x = getX(col);
+        y = getY(row);
+
     }
     public boolean canMove(int targetCol,int targetRow){
         return false;
     }
     public boolean outside(int targetCol,int targetRow){
         if(targetCol<0||targetRow<0||targetCol>7||targetRow>7)
-            return false;
-        else return true;
+            return true;
+        else return false;
+    }
+    public piece getCollisions(int targetCol, int targetRow)
+    {
+        for(piece P: Panel.simPieces)
+        {
+            if(P.col==targetCol&&P.row==targetRow&&P!=this) return P;
+        }
+        return null;
     }
 
 }

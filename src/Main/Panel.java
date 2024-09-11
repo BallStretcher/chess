@@ -41,7 +41,7 @@ public class Panel extends JPanel implements Runnable {
         pieces.add(new Queen(BLACK,3,0));
         pieces.add(new Queen(WHITE,3,7));
         pieces.add(new King(BLACK,4,0));
-        pieces.add(new King(WHITE,4,7));
+        pieces.add(new King(WHITE,4,4));
     }
     private void copyPiece(ArrayList<piece> src,ArrayList<piece>tgt){
         tgt.clear();
@@ -64,10 +64,14 @@ public class Panel extends JPanel implements Runnable {
         addMouseListener(mouse);
     }
 
-    private void update(){
-        if(mouse.pressed){
-            if(activeP==null){
-                for(piece a:simPieces){
+    private void update()
+    {
+        if(mouse.pressed)
+        {
+            if(activeP==null)
+            {
+                for(piece a:simPieces)
+                {
                     if(a.color==currColor &&
                             a.col== mouse.x/Borda.SQUARE_SIZE &&
                             a.row== mouse.y/Borda.SQUARE_SIZE){
@@ -77,32 +81,40 @@ public class Panel extends JPanel implements Runnable {
                 }
             }
             else simulate();
-
         }
-        if(!mouse.pressed){
-            if(activeP!=null){
+        if(!mouse.pressed)
+        {
+            if(activeP!=null)
+            {
                 if(validSquare)
-                activeP.updPos();
+                {
+                    activeP.updPos();
+                }
+                else
+                {
+                    activeP.reset();
+                }
                 activeP=null;
             }
-
-
         }
-
-
-
-
-
     }
+
+
+
+
     private void simulate(){
     activeP.x = mouse.x-Borda.HALF_SQUARE_SIZE;
     activeP.y = mouse.y-Borda.HALF_SQUARE_SIZE;
     activeP.row = activeP.getRow(activeP.y);
     activeP.col = activeP.getCol(activeP.x);
-    canMove = false;
-    validSquare=false;
-    if(activeP.canMove(activeP.col,activeP.row)){
+    if(activeP.canMove(activeP.col,activeP.row))
+    {
         canMove=true;
+        validSquare=true;
+    }
+    else
+    {
+        canMove = false;
         validSquare=false;
     }
     }
@@ -120,11 +132,15 @@ public class Panel extends JPanel implements Runnable {
         for(piece p : simPieces){
             p.draw(g2);
         }
-        if(activeP!=null){
-            g2.setColor(Color.DARK_GRAY);
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
-            g2.fillRect(activeP.col*Borda.SQUARE_SIZE,activeP.row*Borda.SQUARE_SIZE,Borda.SQUARE_SIZE,Borda.SQUARE_SIZE);
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+        if(activeP!=null)
+        {
+            if(canMove) {
+                g2.setColor(Color.white);
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
+                g2.fillRect(activeP.col * Borda.SQUARE_SIZE, activeP.row * Borda.SQUARE_SIZE, Borda.SQUARE_SIZE, Borda.SQUARE_SIZE);
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+
+            }
             activeP.draw(g2);
         }
     }

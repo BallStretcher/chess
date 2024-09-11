@@ -14,4 +14,14 @@ public class Slonyara extends piece{
             else  image=getImage("b-slon2");
         }
     }
+
+    public boolean canMove(int targetCol,int targetRow){
+        if(!outside(targetCol,targetRow)){
+            if((Math.abs(targetCol-colBefore)+Math.abs(targetRow-rowBefore)%2==0)&&(Math.abs(targetCol-colBefore)*Math.abs(targetRow-rowBefore)<=7)){
+                //двигается только диагонально
+                return true;
+            }
+        }
+        return false;
+    }
 }

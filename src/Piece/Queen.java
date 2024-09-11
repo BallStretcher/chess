@@ -8,4 +8,16 @@ public class Queen extends piece{
         if(color== Panel.WHITE) image=getImage("w-queen");
         else  image=getImage("b-queen");
     }
+
+    public boolean canMove(int targetCol,int targetRow)
+    {
+        if(!outside(targetCol,targetRow))
+        {
+            if(Math.abs(targetCol-colBefore)+Math.abs(targetRow-rowBefore)<=7||(Math.abs(targetCol-colBefore)*Math.abs(targetRow-rowBefore)<=7))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

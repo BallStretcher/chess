@@ -12,12 +12,16 @@ public class King extends piece{
     }
     public boolean canMove(int targetCol,int targetRow){
         if(!outside(targetCol,targetRow)){
-            if(Math.abs(targetCol-colBefore)+Math.abs(targetRow-rowBefore)==1){
-                if(Math.abs(targetCol-colBefore)*Math.abs(targetRow-rowBefore)==1){}
-            }//если расстояние больше одного для короля
-            return true;
-        }
+            if(Math.abs(targetCol-colBefore)+Math.abs(targetRow-rowBefore)==1||(Math.abs(targetCol-colBefore)*Math.abs(targetRow-rowBefore)==1)){
+               // if(Math.abs(targetCol-colBefore)*Math.abs(targetRow-rowBefore)==1) {
+                    return true;
+                //}
 
-        else return false;
+                }
+                    //если расстояние больше одного для короля
+
+
+            }
+         return false;
     }
 }
