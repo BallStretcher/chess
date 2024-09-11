@@ -17,7 +17,7 @@ public class Slonyara extends piece{
 
     public boolean canMove(int targetCol,int targetRow){
         if(!outside(targetCol,targetRow)){
-            if((Math.abs(targetCol-colBefore)+Math.abs(targetRow-rowBefore)%2==0)&&(Math.abs(targetCol-colBefore)*Math.abs(targetRow-rowBefore)<=7)){
+            if((Math.abs(targetCol-colBefore)==Math.abs(targetRow-rowBefore))){
                 //двигается только диагонально
                 return true;
             }
