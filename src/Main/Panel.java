@@ -51,7 +51,7 @@ public class Panel extends JPanel implements Runnable {
     }
     public static final int WHITE=0;
     public static final int BLACK=1;
-    int currColor = WHITE;
+    int currColor = 0;
 
 
 
@@ -88,13 +88,15 @@ public class Panel extends JPanel implements Runnable {
             {
                 if(validSquare)
                 {
+                   copyPiece(simPieces,pieces);
                     activeP.updPos();
                 }
                 else
                 {
+                   copyPiece(pieces,simPieces);
                     activeP.reset();
+                    activeP=null;
                 }
-                activeP=null;
             }
         }
     }
@@ -103,13 +105,20 @@ public class Panel extends JPanel implements Runnable {
 
 
     private void simulate(){
+
     activeP.x = mouse.x-Borda.HALF_SQUARE_SIZE;
     activeP.y = mouse.y-Borda.HALF_SQUARE_SIZE;
     activeP.row = activeP.getRow(activeP.y);
     activeP.col = activeP.getCol(activeP.x);
+
+
     if(activeP.canMove(activeP.col,activeP.row))
     {
         canMove=true;
+        if(activeP.Colliding!=null)
+        {
+            simPieces.remove(activeP.Colliding.getIndex());
+        }
         validSquare=true;
     }
     else

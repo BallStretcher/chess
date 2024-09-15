@@ -12,4 +12,28 @@ public class Peshka extends piece{
 
     }
 
+
+    public boolean canMove(int targetCol,int targetRow)
+    {
+        int count=1;
+        int initCol = col;
+        int initRow = row;
+
+        if(!outside(targetCol,targetRow))
+        {
+            if(initRow==row&&initCol==col)
+            {
+                if(Math.abs(targetCol-colBefore)+Math.abs(targetRow-rowBefore)==1||(Math.abs(targetCol-colBefore)*Math.abs(targetRow-rowBefore)==1)){
+                    return true;
+                }
+            }
+
+            else
+            if(Math.abs(targetCol-colBefore)+Math.abs(targetRow-rowBefore)==1||(Math.abs(targetCol-colBefore)*Math.abs(targetRow-rowBefore)==1)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

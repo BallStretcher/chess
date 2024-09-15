@@ -12,6 +12,7 @@ public class piece
 {
     public BufferedImage image;
     public int x,y,col,row,colBefore,rowBefore,color;
+    public piece Colliding;
 
     public piece(int color,int col, int row)
     {
@@ -82,17 +83,39 @@ public class piece
     }
     public boolean outside(int targetCol,int targetRow)
     {
-        if(targetCol<0||targetRow<0||targetCol>7||targetRow>7)
-            return true;
-        else return false;
+        return targetCol < 0 || targetRow < 0 || targetCol > 7 || targetRow > 7;
     }
-    public piece getCollisions(int targetCol, int targetRow)
+    public piece getCollision(int targetCol, int targetRow)
     {
         for(piece P: Panel.simPieces)
         {
-            if(P.col==targetCol&&P.row==targetRow&&P!=this) return P;
+            if(P.col==targetCol && P.row==targetRow && P!=this) return P;
         }
         return null;
+    }
+
+    public int getIndex()
+    { for(int i=0;i<Panel.simPieces.size();i++)
+        if(Panel.simPieces.get(i)==this)
+            return i;
+        return 0;
+    }
+
+    public boolean isValidSqr(int targetCol,int targetRow)
+    {
+        Colliding = getCollision(targetCol,targetRow);
+        if(Colliding==null)
+            return true;
+        else
+        {
+            if(Colliding.color!=this.color)
+            {
+                System.out.println("захват");
+                return true;
+            }
+            else Colliding=null;
+        }
+        return false;
     }
 
 }
