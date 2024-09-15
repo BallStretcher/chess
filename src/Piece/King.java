@@ -16,10 +16,11 @@ public class King extends piece
     {
         if(!outside(targetCol,targetRow))
         {
-            if(Math.abs(targetCol-colBefore)+Math.abs(targetRow-rowBefore)==1||(Math.abs(targetCol-colBefore)*Math.abs(targetRow-rowBefore)==1)){
-                    return true;
+            if(Math.abs(targetCol-colBefore)+Math.abs(targetRow-rowBefore)==1||(Math.abs(targetCol-colBefore)*Math.abs(targetRow-rowBefore)==1))
+            {
+                if(isValidSqr(targetCol, targetRow)) return true;
             }
-                    //если расстояние больше одного для короля
+
             }
          return false;
     }
