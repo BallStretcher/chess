@@ -117,6 +117,7 @@ public class Panel extends JPanel implements Runnable {
         canMove=true;
         if(activeP.Colliding!=null)
         {
+            if(!mouse.pressed)
             simPieces.remove(activeP.Colliding.getIndex());
         }
         validSquare=true;
