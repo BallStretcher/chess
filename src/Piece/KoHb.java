@@ -25,12 +25,12 @@ public class KoHb extends piece
             if(Math.abs(targetCol-colBefore)==2&&Math.abs(targetRow-rowBefore)==1)
             {
                 //двигается только буквой "Г"
-                return true;
+                if(isValidSqr(targetCol, targetRow))return true;
             }
             if(Math.abs(targetCol-colBefore)==1&&Math.abs(targetRow-rowBefore)==2)
             {
                 //двигается только буквой "Г"
-                return true;
+                if(isValidSqr(targetCol, targetRow)) return true;
             }
         }
         return false;

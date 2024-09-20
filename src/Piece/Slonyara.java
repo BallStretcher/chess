@@ -26,7 +26,7 @@ public class Slonyara extends piece
             if((Math.abs(targetCol-colBefore)==Math.abs(targetRow-rowBefore)))
             {
                 //двигается только диагонально
-                return true;
+                if(isValidSqr(targetCol, targetRow))return true;
             }
         }
         return false;

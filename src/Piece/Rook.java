@@ -21,7 +21,7 @@ public class Rook extends piece
             if((Math.abs(targetCol-colBefore)+Math.abs(targetRow-rowBefore)<=7)&&(Math.abs(targetCol-colBefore)*Math.abs(targetRow-rowBefore)==0))
             {
                 //двигается только по вертикально и горизонтально
-                return true;
+                if(isValidSqr(targetCol, targetRow)) return true;
             }
         }
         return false;

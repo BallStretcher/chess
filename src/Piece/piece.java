@@ -23,6 +23,7 @@ public class piece
         y = getY(row);
         colBefore = col;
         rowBefore = row;
+        int moveCount=1;
 
     }
     public BufferedImage getImage(String imagePath)
@@ -108,9 +109,9 @@ public class piece
             return true;
         else
         {
+
             if(Colliding.color!=this.color)
-            {
-                System.out.println("захват");
+            {System.out.println("[eq");
                 return true;
             }
             else Colliding=null;

@@ -41,13 +41,11 @@ public class Panel extends JPanel implements Runnable {
         pieces.add(new Queen(BLACK,3,0));
         pieces.add(new Queen(WHITE,3,7));
         pieces.add(new King(BLACK,4,0));
-        pieces.add(new King(WHITE,4,4));
+        pieces.add(new King(WHITE,4,7));
     }
     private void copyPiece(ArrayList<piece> src,ArrayList<piece>tgt){
         tgt.clear();
-        for(int i=0;i< src.size();i++){
-            tgt.add(src.get(i));
-        }
+        tgt.addAll(src);
     }
     public static final int WHITE=0;
     public static final int BLACK=1;
@@ -55,7 +53,8 @@ public class Panel extends JPanel implements Runnable {
 
 
 
-    public Panel(){
+    public Panel()
+    {
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
         setBackground(Color.BLACK);
         setPieces();
@@ -74,13 +73,16 @@ public class Panel extends JPanel implements Runnable {
                 {
                     if(a.color==currColor &&
                             a.col== mouse.x/Borda.SQUARE_SIZE &&
-                            a.row== mouse.y/Borda.SQUARE_SIZE){
+                            a.row== mouse.y/Borda.SQUARE_SIZE)
+                    {
                         activeP=a;
 
                     }
                 }
+
             }
-            else simulate();
+             else simulate();
+
         }
         if(!mouse.pressed)
         {
@@ -95,8 +97,8 @@ public class Panel extends JPanel implements Runnable {
                 {
                    copyPiece(pieces,simPieces);
                     activeP.reset();
-                    activeP=null;
                 }
+                activeP=null;
             }
         }
     }
@@ -105,7 +107,7 @@ public class Panel extends JPanel implements Runnable {
 
 
     private void simulate(){
-
+        copyPiece(simPieces,pieces);
     activeP.x = mouse.x-Borda.HALF_SQUARE_SIZE;
     activeP.y = mouse.y-Borda.HALF_SQUARE_SIZE;
     activeP.row = activeP.getRow(activeP.y);
@@ -156,15 +158,18 @@ public class Panel extends JPanel implements Runnable {
     }
 
     @Override
-    public void run() {
+    public void run()
+    {
         double drawInterval = 1000000000/fps;
         double delta = 0;
         long lastTime = System.nanoTime();
         long curTime;
-        while (gameThread!=null) {
+        while (gameThread!=null)
+        {
             curTime = System.nanoTime();
             delta+=(curTime-lastTime)/drawInterval;
-            if(delta>=1){
+            if(delta>=1)
+            {
                 update();
                 repaint();
                 delta--;
