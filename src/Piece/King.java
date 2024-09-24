@@ -16,7 +16,7 @@ public class King extends piece
     {
         if(!outside(targetCol,targetRow))
         {
-            if(Math.abs(targetCol-colBefore)+Math.abs(targetRow-rowBefore)==1||(Math.abs(targetCol-colBefore)*Math.abs(targetRow-rowBefore)==1))
+            if(Math.abs(targetCol-colBefore)+Math.abs(targetRow-rowBefore)==1||(Math.abs(targetCol-colBefore)*Math.abs(targetRow-rowBefore)==1)&&!sameSqr(this,targetCol,targetRow))
             {
                 if(isValidSqr(targetCol, targetRow)) return true;
             }

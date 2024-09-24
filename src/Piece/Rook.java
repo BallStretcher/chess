@@ -18,7 +18,7 @@ public class Rook extends piece
     {
         if(!outside(targetCol,targetRow))
         {
-            if((Math.abs(targetCol-colBefore)+Math.abs(targetRow-rowBefore)<=7)&&(Math.abs(targetCol-colBefore)*Math.abs(targetRow-rowBefore)==0))
+            if((Math.abs(targetCol-colBefore)+Math.abs(targetRow-rowBefore)<=7)&&(Math.abs(targetCol-colBefore)*Math.abs(targetRow-rowBefore)==0)&&!sameSqr(this,targetCol,targetRow))
             {
                 //двигается только по вертикально и горизонтально
                 if(isValidSqr(targetCol, targetRow)) return true;

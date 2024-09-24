@@ -118,5 +118,17 @@ public class piece
         }
         return false;
     }
+    public boolean sameSqr(piece pie,int targetCol,int targetRow)
+    {
+        final int INITCOL = pie.col;
+        final int INITROW = pie.row;
+
+        if(targetCol==INITCOL&&targetRow==INITROW)
+        {
+            return false;
+        }
+        return true;
+
+    }
 
 }
