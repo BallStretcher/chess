@@ -92,6 +92,8 @@ public class Panel extends JPanel implements Runnable {
                 {
                    copyPiece(simPieces,pieces);
                     activeP.updPos();
+                    if(activeP instanceof Peshka)
+                        ((Peshka) activeP).turn++;
                 }
                 else
                 {

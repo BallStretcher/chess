@@ -23,7 +23,6 @@ public class piece
         y = getY(row);
         colBefore = col;
         rowBefore = row;
-        int moveCount=1;
 
     }
     public BufferedImage getImage(String imagePath)
