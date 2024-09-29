@@ -13,6 +13,7 @@ public class piece
     public BufferedImage image;
     public int x,y,col,row,colBefore,rowBefore,color;
     public piece Colliding;
+    public boolean moved;
 
     public piece(int color,int col, int row)
     {
@@ -68,6 +69,7 @@ public class piece
         y = getY(row);
         colBefore = getCol(x);
         rowBefore = getRow(y);
+        moved=true;
     }
     public void reset()
     {
@@ -95,8 +97,9 @@ public class piece
     }
 
     public int getIndex()
-    { for(int i=0;i<Panel.simPieces.size();i++)
-        if(Panel.simPieces.get(i)==this)
+    {
+        for(int i=0;i<Panel.simPieces.size();i++)
+            if(Panel.simPieces.get(i)==this)
             return i;
         return 0;
     }
@@ -108,9 +111,8 @@ public class piece
             return true;
         else
         {
-
             if(Colliding.color!=this.color)
-            {System.out.println("[eq");
+            {
                 return true;
             }
             else Colliding=null;
