@@ -12,7 +12,8 @@ public class Peshka extends piece {
     }
 
 
-    public boolean canMove(int targetCol, int targetRow) {
+    public boolean canMove(int targetCol, int targetRow)
+    {
         if (!outside(targetCol, targetRow)&&!sameSqr(targetCol,targetRow))
         {
             int step;
@@ -21,11 +22,16 @@ public class Peshka extends piece {
             else step=1;
 
             Colliding = getCollision(targetCol,targetRow);
-            if(targetCol==colBefore&&targetRow==rowBefore+step&&Colliding==null)
+            if(targetCol==colBefore&&targetRow==rowBefore+step && Colliding==null)
                 return true;
 
             if(targetCol==colBefore&&targetRow==rowBefore+step*2&&Colliding==null&&moved==false)
                 return true;
+
+            if(Math.abs(targetCol-colBefore)==1&&targetRow==rowBefore+step && Colliding!=null &&Colliding.color!=color)
+                return true;
+
+
         }
         return false;
     }

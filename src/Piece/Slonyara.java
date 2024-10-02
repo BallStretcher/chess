@@ -21,9 +21,9 @@ public class Slonyara extends piece
 
     public boolean canMove(int targetCol,int targetRow)
     {
-        if(!outside(targetCol,targetRow))
+        if(!outside(targetCol,targetRow)&&!sameSqr(targetCol,targetRow))
         {
-            if((Math.abs(targetCol-colBefore)==Math.abs(targetRow-rowBefore))&&!sameSqr(targetCol,targetRow))
+            if((Math.abs(targetCol-colBefore)==Math.abs(targetRow-rowBefore)))
             {
                 //двигается только диагонально
                 if(isValidSqr(targetCol, targetRow))return true;

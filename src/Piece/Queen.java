@@ -13,7 +13,7 @@ public class Queen extends piece
 
     public boolean canMove(int targetCol,int targetRow)
     {
-        if(!outside(targetCol,targetRow))
+        if(!outside(targetCol,targetRow)&&!sameSqr(targetCol,targetRow))
         {
             if(Math.abs(targetCol-colBefore)+Math.abs(targetRow-rowBefore)<=7||(Math.abs(targetCol-colBefore)*Math.abs(targetRow-rowBefore)<=7))
             {
