@@ -92,6 +92,9 @@ public class Panel extends JPanel implements Runnable {
                 {
                    copyPiece(simPieces,pieces);
                     activeP.updPos();
+                    if(currColor==1)
+                        currColor--;
+                    else currColor++;
                 }
                 else
                 {
@@ -120,8 +123,18 @@ public class Panel extends JPanel implements Runnable {
         if(activeP.Colliding!=null)
         {
             if(!mouse.pressed)
-            simPieces.remove(activeP.Colliding.getIndex());
-        }
+            {
+                simPieces.remove(activeP.Colliding.getIndex());
+                if(activeP.Colliding instanceof King)
+                {
+                    if(activeP.color==1)
+                        JOptionPane.showMessageDialog(null, "BLACK WIN, CONGRATULATIONS!");
+                    else
+                        JOptionPane.showMessageDialog(null, "WHITE WIN, CONGRATULATIONS!");
+                }
+
+            }
+            }
         validSquare=true;
     }
     else

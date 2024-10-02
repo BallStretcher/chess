@@ -20,7 +20,7 @@ public class KoHb extends piece
 
     public boolean canMove(int targetCol,int targetRow)
     {
-        if(!outside(targetCol,targetRow))
+        if(!outside(targetCol,targetRow)&&!sameSqr(targetCol,targetRow))
         {
             if(Math.abs(targetCol-colBefore)==2&&Math.abs(targetRow-rowBefore)==1)
             {
