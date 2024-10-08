@@ -6,8 +6,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Panel extends JPanel implements Runnable {
-    public static final int WIDTH = 1100;
-    public static final int HEIGHT = 800;
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 900;
     final int fps = 60;
     Thread gameThread;
     Borda borda = new Borda();
