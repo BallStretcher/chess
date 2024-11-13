@@ -63,6 +63,15 @@ public class Panel extends JPanel implements Runnable {
         addMouseListener(mouse);
     }
 
+
+    private void turn()
+    {
+        if(currColor==1)
+            currColor--;
+        else currColor++;
+    }
+
+
     private void update()
     {
         if(mouse.pressed)
@@ -92,9 +101,8 @@ public class Panel extends JPanel implements Runnable {
                 {
                    copyPiece(simPieces,pieces);
                     activeP.updPos();
-                    if(currColor==1)
-                        currColor--;
-                    else currColor++;
+                    turn();
+
                 }
                 else
                 {
@@ -110,6 +118,7 @@ public class Panel extends JPanel implements Runnable {
 
 
     private void simulate(){
+        copyPiece(simPieces,pieces);
         copyPiece(simPieces,pieces);
     activeP.x = mouse.x-Borda.HALF_SQUARE_SIZE;
     activeP.y = mouse.y-Borda.HALF_SQUARE_SIZE;
@@ -127,14 +136,14 @@ public class Panel extends JPanel implements Runnable {
                 simPieces.remove(activeP.Colliding.getIndex());
                 if(activeP.Colliding instanceof King)
                 {
-                    if(activeP.color==1)
-                        JOptionPane.showMessageDialog(null, "BLACK WIN, CONGRATULATIONS!");
-                    else
-                        JOptionPane.showMessageDialog(null, "WHITE WIN, CONGRATULATIONS!");
-                }
+                    if(currColor==1)
+                        currColor=2;
 
+                    if(currColor==0)
+                        currColor=3;
+                }
             }
-            }
+        }
         validSquare=true;
     }
     else
@@ -159,22 +168,37 @@ public class Panel extends JPanel implements Runnable {
         }
         if(activeP!=null)
         {
-            if(canMove) {
+            if(canMove)
+            {
                 g2.setColor(Color.white);
                 g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
                 g2.fillRect(activeP.col * Borda.SQUARE_SIZE, activeP.row * Borda.SQUARE_SIZE, Borda.SQUARE_SIZE, Borda.SQUARE_SIZE);
                 g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+                activeP.draw(g2);
 
             }
-            activeP.draw(g2);
+            //activeP.draw(g2);
+
         }
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2.setFont(new Font("Comic Sans",Font.PLAIN,50));
+        g2.setColor(Color.white);
+
+        if(currColor==0)
+            g2.drawString("Ходят белые",250,850);
+        else if(currColor==1)
+            g2.drawString("Ходят чёрные",250,850);
+        else if(currColor==2)
+            g2.drawString("Чёрные победили!",200,850);
+        else g2.drawString("Белые победили!",200,850);
+
     }
 
     @Override
     public void run()
     {
         double drawInterval = 1000000000/fps;
-        double delta = 0;
+        double delta = 0.6;
         long lastTime = System.nanoTime();
         long curTime;
         while (gameThread!=null)
@@ -189,4 +213,5 @@ public class Panel extends JPanel implements Runnable {
             }
         }
     }
+
 }

@@ -65,11 +65,12 @@ public class piece
     }
     public void updPos()
     {
+        moved=true;
         x = getX(col);
         y = getY(row);
         colBefore = getCol(x);
         rowBefore = getRow(y);
-        moved=true;
+
     }
     public void reset()
     {

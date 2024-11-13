@@ -23,7 +23,7 @@ public class Slonyara extends piece
     {
         if(!outside(targetCol,targetRow)&&!sameSqr(targetCol,targetRow))
         {
-            if((Math.abs(targetCol-colBefore)==Math.abs(targetRow-rowBefore)))
+            if(Math.abs(targetCol-colBefore)==Math.abs(targetRow-rowBefore))
             {
                 //двигается только диагонально
                 if(isValidSqr(targetCol, targetRow))return true;

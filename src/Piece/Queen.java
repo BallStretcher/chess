@@ -15,10 +15,12 @@ public class Queen extends piece
     {
         if(!outside(targetCol,targetRow)&&!sameSqr(targetCol,targetRow))
         {
-            if(Math.abs(targetCol-colBefore)+Math.abs(targetRow-rowBefore)<=7||(Math.abs(targetCol-colBefore)*Math.abs(targetRow-rowBefore)<=7))
+            if((Math.abs(targetCol-colBefore)+Math.abs(targetRow-rowBefore)<=7)&&(Math.abs(targetCol-colBefore)*Math.abs(targetRow-rowBefore)==0)
+                    ||Math.abs(targetCol-colBefore)==Math.abs(targetRow-rowBefore))
             {
-                return true;
+                if(isValidSqr(targetCol, targetRow)) return true;
             }
+
         }
         return false;
     }
